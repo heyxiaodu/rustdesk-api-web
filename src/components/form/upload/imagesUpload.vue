@@ -93,7 +93,7 @@
       },
       type: {
         type: String,
-        default: 'local', //local oss
+        default: 'local',
       },
       multiple: {
         type: Boolean,
@@ -224,7 +224,7 @@
 
     .drag-tips {
       font-size: 12px;
-      color: #999;
+      color: var(--el-text-color-secondary);
     }
 
 

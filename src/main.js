@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import 'element-plus/dist/index.css'
+import '@/styles/element-theme.scss'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
