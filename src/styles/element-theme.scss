@@ -1,0 +1,64 @@
+:root {
+  /* 1. 核心品牌色与状态色 */
+  --el-color-primary: #1E5EFF;
+  --el-color-primary-light-3: #4078FF;
+  --el-color-primary-dark-2: #0042EB;
+  --el-color-primary-light-9: #E8F0FF;
+
+  --el-color-success: #00B42A;
+  --el-color-warning: #FF7D00;
+  --el-color-danger: #F53F3F;
+
+  /* 2. 文本与灰度层级 (信息降噪) */
+  --el-text-color-primary: #1D2129;
+  --el-text-color-regular: #4E5969;
+  --el-text-color-secondary: #86909C;
+
+  --el-bg-color-page: #F2F3F5;
+  --el-bg-color: #FFFFFF;
+  --el-border-color-light: #E5E6EB;
+  --el-border-color-lighter: #F2F3F5;
+
+  /* 3. 物理悬浮阴影 (多层漫反射) */
+  --el-box-shadow: 0 2px 5px -1px rgba(29, 33, 41, 0.04), 0 1px 3px -1px rgba(29, 33, 41, 0.02);
+  --el-box-shadow-light: 0 4px 10px -2px rgba(29, 33, 41, 0.08), 0 2px 6px -2px rgba(29, 33, 41, 0.04);
+  --el-box-shadow-dark: 0 10px 30px -4px rgba(29, 33, 41, 0.12);
+
+  /* 4. 阶梯式圆角 */
+  --el-border-radius-base: 4px;
+  --el-border-radius-round: 8px;
+}
+
+/* 5. 组件级深度覆盖与动效补充 */
+.el-table th.el-table__cell {
+  background-color: #F7F8FA !important;
+  color: var(--el-text-color-primary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--el-border-color-light);
+}
+
+.el-dialog {
+  border-radius: 12px !important;
+  box-shadow: var(--el-box-shadow-dark) !important;
+}
+
+.el-card {
+  border-radius: var(--el-border-radius-round);
+  border: 1px solid var(--el-border-color-light);
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.el-card:hover {
+  box-shadow: var(--el-box-shadow-light);
+  transform: translateY(-2px);
+}
+
+html.dark {
+  --el-bg-color-page: #1a1a1a;
+  --el-bg-color: #242424;
+  --el-text-color-primary: #ffffff;
+  --el-text-color-regular: #e0e0e0;
+  --el-text-color-secondary: #a0a0a0;
+  --el-border-color-light: #3a3a3a;
+  --el-border-color-lighter: #2a2a2a;
+}
