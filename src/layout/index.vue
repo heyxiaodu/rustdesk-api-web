@@ -46,17 +46,20 @@
 
 <style lang="scss" scoped>
 .app-header {
-  background-color: #3f454b;
-  color: var(--basicWhite);
+  background-color: var(--gray-white);
+  color: var(--gray-1);
   display: flex;
-  height: 50px;
+  height: 52px;
+  border-bottom: 1px solid var(--gray-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .header-tags {
   height: auto;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--gray-border);
   display: flex;
   padding: 0;
+  background-color: var(--gray-bg);
 }
 
 .app-left {
@@ -65,6 +68,11 @@
 
 .app-container {
   min-height: 100vh;
+}
+
+.app-main {
+  overflow-y: auto;
+  background-color: var(--gray-bg);
 }
 </style>
 

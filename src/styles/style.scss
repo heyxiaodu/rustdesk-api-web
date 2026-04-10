@@ -1,30 +1,405 @@
-$basicBlack: #000000;
-$basicWhite: #ffffff;
+// ============================================================
+// 现代化科技感设计系统
+// rustdesk-api-web 主题定制
+// ============================================================
 
-$primaryColor: #409eff;
+// --------------------------------------------------------
+// 1. 配色体系
+// --------------------------------------------------------
 
+// 底层灰度
+$gray-bg:           #F2F3F5;   // 页面底色（极浅冷灰）
+$gray-white:        #FFFFFF;   // 设备卡片白（信息岛屿）
+$gray-1:            #1D2129;   // 大标题/设备名（深枪灰）
+$gray-2:            #4E5969;   // 正文/IP地址（中灰）
+$gray-3:            #86909C;   // 辅助信息/时间戳（浅灰）
+$gray-border:       #E4E7ED;   // 边框线
+
+// 主色：科技蓝
+$primary:           #1E5EFF;
+$primary-light:     #4070FF;
+$primary-dark:      #1650E0;
+$primary-bg:        #EBF0FF;   // 主色浅背景
+
+// 状态色（克制但可捕获）
+$status-online:     #1DBF61;   // 在线绿
+$status-warning:    #FF7A00;   // 警告橙
+$status-offline:    #F53F3F;   // 离线红
+$status-online-bg:  #E8FFEE;
+$status-warning-bg: #FFF7E6;
+$status-offline-bg: #FFEDED;
+
+// 侧边栏（深色科技感）
+$sidebar-bg:        #1D2129;
+$sidebar-hover:     rgba(255, 255, 255, 0.08);
+$sidebar-active:    rgba(30, 94, 255, 0.2);
+$sidebar-text:      rgba(255, 255, 255, 0.85);
+$sidebar-text-active: #FFFFFF;
+
+// --------------------------------------------------------
+// CSS 变量（全局注入）
+// --------------------------------------------------------
 :root {
-  --basicBlack: #000000;
-  --basicWhite: #ffffff;
-  --primaryColor: #409eff;
-  --tag-bg-color: #efefef;
+  // 灰度
+  --gray-bg:          #F2F3F5;
+  --gray-white:       #FFFFFF;
+  --gray-1:           #1D2129;
+  --gray-2:           #4E5969;
+  --gray-3:           #86909C;
+  --gray-border:      #E4E7ED;
+
+  // 主色
+  --primary:          #1E5EFF;
+  --primary-light:    #4070FF;
+  --primary-dark:     #1650E0;
+  --primary-bg:       #EBF0FF;
+
+  // 状态色
+  --status-online:    #1DBF61;
+  --status-warning:    #FF7A00;
+  --status-offline:    #F53F3F;
+  --status-online-bg:  #E8FFEE;
+  --status-warning-bg: #FFF7E6;
+  --status-offline-bg: #FFEDED;
+
+  // 侧边栏
+  --sidebar-bg:        #1D2129;
+  --sidebar-hover:     rgba(255, 255, 255, 0.08);
+  --sidebar-active:    rgba(30, 94, 255, 0.2);
+
+  // 文字层级
+  --text-primary:      #1D2129;
+  --text-regular:      #4E5969;
+  --text-secondary:     #86909C;
+
+  // Element Plus 覆盖
+  --el-color-primary:  #1E5EFF;
+  --el-border-radius-base: 4px;
 }
 
+// --------------------------------------------------------
+// 2. 基础布局
+// --------------------------------------------------------
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background-color: var(--gray-bg);
+  color: var(--text-regular);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-.list-body {
-  margin: 10px 0;
+// --------------------------------------------------------
+// 3. 按钮（微观操作 → 4px 圆角）
+// --------------------------------------------------------
+.el-button {
+  border-radius: 4px !important;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &--primary {
+    background-color: $primary !important;
+    border-color: $primary !important;
+
+    &:hover {
+      background-color: $primary-light !important;
+      border-color: $primary-light !important;
+      box-shadow: 0 4px 12px rgba(30, 94, 255, 0.3) !important;
+    }
+
+    &:active {
+      background-color: $primary-dark !important;
+      border-color: $primary-dark !important;
+    }
+  }
+
+  &--success {
+    &:hover { box-shadow: 0 4px 12px rgba(29, 191, 97, 0.3); }
+  }
+
+  &--warning {
+    &:hover { box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3); }
+  }
+
+  &--danger {
+    &:hover { box-shadow: 0 4px 12px rgba(245, 63, 63, 0.3); }
+  }
 }
 
-.dialog-form {
-  max-width: 600px;
-  margin: 20px auto;
+// --------------------------------------------------------
+// 4. 卡片（信息岛屿，中观容器 → 8px 圆角）
+// --------------------------------------------------------
+.el-card {
+  border-radius: 8px !important;
+  border: 1px solid $gray-border !important;
+  background-color: $gray-white;
+  border: none !important;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  transition:
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.08),
+      0 2px 6px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+  }
 }
 
+// --------------------------------------------------------
+// 5. 输入框 / 文本域（微观操作 → 4px 圆角）
+// --------------------------------------------------------
+.el-input {
+  .el-input__wrapper {
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    &:focus-within {
+      box-shadow: 0 0 0 2px rgba(30, 94, 255, 0.15) inset !important;
+      border-color: $primary !important;
+    }
+  }
+}
+
+.el-textarea {
+  .el-textarea__inner {
+    border-radius: 4px;
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(30, 94, 255, 0.15) inset;
+    }
+  }
+}
+
+// --------------------------------------------------------
+// 6. 表格
+// --------------------------------------------------------
+.el-table {
+  --el-table-header-bg-color: #F7F8FA;
+  --el-table-row-hover-bg-color: #F0F4FF;
+  --el-table-border-color: #E4E7ED;
+
+  border-radius: 8px;
+  overflow: hidden;
+
+  th.el-table__cell {
+    background-color: #F7F8FA;
+    font-weight: 600;
+    color: $gray-1;
+    font-size: 13px;
+  }
+
+  tr:hover > td.el-table__cell {
+    background-color: #F0F4FF !important;
+  }
+
+  td.el-table__cell {
+    border-bottom: 1px solid #F0F0F0;
+    color: $gray-2;
+  }
+}
+
+// --------------------------------------------------------
+// 7. 标签 Tag（微观操作 → 4px 圆角）
+// --------------------------------------------------------
+.el-tag {
+  border-radius: 4px !important;
+  border: none;
+  font-weight: 500;
+
+  &.el-tag--primary {
+    background-color: $primary-bg;
+    color: $primary;
+  }
+
+  &.el-tag--success {
+    background-color: $status-online-bg;
+    color: $status-online;
+  }
+
+  &.el-tag--warning {
+    background-color: $status-warning-bg;
+    color: $status-warning;
+  }
+
+  &.el-tag--danger {
+    background-color: $status-offline-bg;
+    color: $status-offline;
+  }
+}
+
+// --------------------------------------------------------
+// 8. 状态指示标签（自定义）
+// --------------------------------------------------------
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  &--online {
+    background-color: $status-online-bg;
+    color: $status-online;
+
+    &::before { background-color: $status-online; }
+  }
+
+  &--warning {
+    background-color: $status-warning-bg;
+    color: $status-warning;
+
+    &::before { background-color: $status-warning; }
+  }
+
+  &--offline {
+    background-color: $status-offline-bg;
+    color: $status-offline;
+
+    &::before { background-color: $status-offline; }
+  }
+}
+
+// --------------------------------------------------------
+// 9. 对话框（宏观阻断 → 12px 圆角）
+// --------------------------------------------------------
+.el-dialog {
+  border-radius: 12px !important;
+  overflow: hidden;
+
+  .el-dialog__header {
+    background-color: var(--gray-white);
+    color: var(--gray-1);
+    padding: 16px 24px !important;
+    margin: 0;
+    border-bottom: 1px solid var(--gray-border);
+
+    .el-dialog__title {
+      color: var(--gray-1);
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .el-dialog__headerbtn {
+      top: 12px !important;
+      right: 16px !important;
+      width: 28px !important;
+      height: 28px !important;
+      border-radius: 50% !important;
+      background-color: transparent !important;
+      transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      .el-icon {
+        color: var(--gray-2) !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+      }
+
+      &:hover {
+        background-color: var(--status-offline) !important;
+        transform: scale(1.1) !important;
+
+        .el-icon {
+          color: #ffffff !important;
+        }
+      }
+    }
+  }
+
+  .el-dialog__body {
+    padding: 24px;
+    background-color: var(--gray-white);
+  }
+
+  .el-dialog__footer {
+    padding: 12px 24px 16px;
+    background-color: var(--gray-white);
+    border-top: 1px solid var(--gray-border);
+  }
+}
+
+// --------------------------------------------------------
+// 10. 分页器
+// --------------------------------------------------------
+.el-pagination {
+  .el-pager li {
+    border-radius: 4px;
+    margin: 0 2px;
+    font-weight: 500;
+
+    &.is-active {
+      background-color: $primary;
+      color: #ffffff;
+    }
+
+    &:hover:not(.is-active) {
+      color: $primary;
+    }
+  }
+
+  .btn-prev,
+  .btn-next {
+    border-radius: 4px;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+// --------------------------------------------------------
+// 11. 表单标签
+// --------------------------------------------------------
+.el-form-item__label {
+  font-weight: 600;
+  color: $gray-1;
+  font-size: 13px;
+}
+
+// --------------------------------------------------------
+// 12. 选择器 / 日期选择器
+// --------------------------------------------------------
+.el-select {
+  .el-select__wrapper {
+    border-radius: 4px;
+  }
+}
+
+.el-date-editor {
+  border-radius: 4px;
+}
+
+// --------------------------------------------------------
+// 13. 列表区域
+// --------------------------------------------------------
 .list-query {
+  background-color: $gray-white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid $gray-border;
+
   .el-select {
     --el-select-width: 160px;
   }
@@ -34,18 +409,190 @@ body {
   }
 }
 
-.table-actions {
-  .el-button {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
+.list-body {
+  margin: 10px 0;
+
+  .el-card {
+    margin-bottom: 12px;
   }
 }
 
+.dialog-form {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.table-actions {
+  .el-button {
+    margin: 4px;
+  }
+}
+
+// --------------------------------------------------------
+// 14. 标签页
+// --------------------------------------------------------
+.el-tabs {
+  &__item {
+    border-radius: 4px 4px 0 0;
+    padding: 0 16px;
+    font-weight: 500;
+    color: $gray-3;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: $primary;
+      background-color: $primary-bg;
+    }
+
+    &.is-active {
+      color: $primary;
+      font-weight: 600;
+    }
+  }
+
+  &__active-bar {
+    background-color: $primary !important;
+  }
+}
+
+// --------------------------------------------------------
+// 15. 开关
+// --------------------------------------------------------
+.el-switch {
+  &.is-checked {
+    .el-switch__core {
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+}
+
+// --------------------------------------------------------
+// 16. 复选框 / 单选框
+// --------------------------------------------------------
+.el-checkbox {
+  .el-checkbox__input.is-checked {
+    .el-checkbox__inner {
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+
+  .el-checkbox__input.is-checked + .el-checkbox__label {
+    color: $primary;
+  }
+}
+
+.el-radio {
+  .el-radio__input.is-checked {
+    .el-radio__inner {
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+
+  .el-radio__input.is-checked + .el-radio__label {
+    color: $primary;
+  }
+}
+
+// --------------------------------------------------------
+// 17. 滑块
+// --------------------------------------------------------
+.el-slider {
+  --el-slider-main-bg-color: #{$primary};
+}
+
+// --------------------------------------------------------
+// 18. 进度条
+// --------------------------------------------------------
+.el-progress-bar__outer {
+  background-color: $gray-border;
+}
+
+.el-progress-bar__inner {
+  background-color: $primary;
+}
+
+// --------------------------------------------------------
+// 19. 文本层级（工具类）
+// --------------------------------------------------------
+.text-title {
+  color: $gray-1;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.text-primary {
+  color: $gray-1;
+}
+
+.text-regular {
+  color: $gray-2;
+}
+
+.text-secondary {
+  color: $gray-3;
+  font-size: 12px;
+}
+
+// --------------------------------------------------------
+// 20. 深色模式适配
+// --------------------------------------------------------
 html.dark {
-  /* 自定义深色背景颜色 */
-  //--el-bg-color: #626aef;
-  --tag-bg-color: #24252b;
-  --basicBlack: #fff;
+  --gray-bg:          #0D1117;
+  --gray-white:       #161B22;
+  --gray-1:           #E6EDF3;
+  --gray-2:           #8B949E;
+  --gray-3:           #6E7681;
+  --gray-border:      #30363D;
+  --primary-bg:       #1C2A4A;
+  --sidebar-bg:       #0D1117;
+  --sidebar-hover:     rgba(255, 255, 255, 0.08);
+  --sidebar-active:    rgba(30, 94, 255, 0.25);
+  --status-online-bg:  #1A3A2A;
+  --status-warning-bg: #3A2A1A;
+  --status-offline-bg: #3A1A1A;
+
+  .el-card {
+    background-color: #161B22;
+    border-color: #30363D !important;
+  }
+
+  .el-table {
+    --el-table-header-bg-color: #161B22;
+    --el-table-row-hover-bg-color: #1C2333;
+    background-color: transparent;
+
+    th.el-table__cell {
+      background-color: #161B22;
+      color: #E6EDF3;
+    }
+  }
+
+  .el-dialog {
+    .el-dialog__body,
+    .el-dialog__footer {
+      background-color: #161B22;
+      border-top-color: #30363D;
+    }
+
+    .el-form-item__label {
+      color: #E6EDF3;
+    }
+  }
+
+  .list-query {
+    background-color: #161B22;
+    border-color: #30363D;
+  }
+
+  .el-pagination .el-pager li {
+    background-color: #161B22;
+    color: #8B949E;
+
+    &.is-active {
+      background-color: $primary;
+    }
+  }
 }

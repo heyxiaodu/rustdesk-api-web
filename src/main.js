@@ -9,6 +9,7 @@ import { pinia } from '@/store'
 import '@/permission'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import '@/styles/style.scss'
+import '@/styles/element-theme.scss'
 import * as ElementIcons from '@element-plus/icons'
 
 const app = createApp(App)

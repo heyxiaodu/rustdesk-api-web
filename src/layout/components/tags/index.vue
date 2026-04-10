@@ -6,7 +6,7 @@
           @close="close(t)"
           @click="toTag(t)"
           :type="t.active?'primary':'info'"
-          :effect="t.active?'dark':'plain'">
+          effect="plain">
     {{ T(t.title) }}
   </el-tag>
 </template>
@@ -72,12 +72,46 @@
 </script>
 
 <style lang="scss" scoped>
+// 容器使用 flex gap 控制间距，彻底替代 margin
+.header-tags {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap;
+  gap: 4px !important;
+  padding: 6px 12px !important;
+}
 
 .tag {
-  border-radius: 0;
+  border-radius: 4px;
   cursor: pointer;
+  margin: 0 !important;
+  border: 1px solid var(--gray-border);
+  background-color: var(--gray-white);
+  color: var(--gray-2);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 0 14px !important;
+  height: 36px;
+  line-height: 34px;
+
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--primary-bg);
+  }
 
   &.active {
+    background-color: var(--primary-bg) !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+    font-weight: 600;
+
+    &:hover {
+      background-color: var(--primary-bg);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
   }
 }
 </style>

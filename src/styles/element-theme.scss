@@ -1,0 +1,228 @@
+// ============================================================
+// Element Plus 侧边栏菜单高级交互动效
+// ============================================================
+
+// --------------------------------------------------------
+// 弹出子菜单（折叠状态 — 最高优先级）
+// --------------------------------------------------------
+.el-menu--popup,
+.el-menu--popup .el-menu,
+.el-popper.is-dark .el-menu--popup {
+  background-color: var(--sidebar-bg) !important;
+}
+
+// 全局弹出层背景强制覆盖
+.el-popper.is-dark,
+.el-popper.is-dark .el-menu--popup {
+  background: var(--sidebar-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 6px !important;
+  padding: 4px 0 !important;
+  min-width: 180px !important;
+
+  .popper__arrow,
+  .el-popper__arrow {
+    display: none !important;
+  }
+
+  .el-menu-item,
+  .el-sub-menu__title {
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+
+    i, .el-icon {
+      color: rgba(255, 255, 255, 0.55) !important;
+    }
+
+    &:hover,
+    &.is-active {
+      background-color: var(--sidebar-hover) !important;
+      color: #ffffff !important;
+
+      i, .el-icon {
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------
+// 左侧蓝色指示条动画（展开态侧边栏）
+// --------------------------------------------------------
+.el-menu-item,
+.el-sub-menu__title {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 3px;
+    height: 0;
+    background-color: var(--el-color-primary);
+    border-radius: 0 2px 2px 0;
+    transition:
+      transform 0.25s ease-in-out,
+      height 0.25s ease-in-out,
+      opacity 0.25s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: var(--sidebar-hover) !important;
+    color: #ffffff !important;
+
+    &::before {
+      transform: translateY(-50%) scaleY(1);
+      height: 60%;
+      opacity: 1;
+    }
+  }
+
+  &.is-active {
+    background-color: var(--sidebar-active) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+
+    &::before {
+      transform: translateY(-50%) scaleY(1);
+      height: 100%;
+      opacity: 1;
+    }
+  }
+}
+
+// ============================================================
+// 顶部多标签页导航（TagsView / el-tag）
+// ============================================================
+
+// 容器强制 flex + gap 控制间距
+.header-tags,
+.header-tags .el-scrollbar__view,
+.header-tags > * {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  flex-wrap: wrap !important;
+}
+
+// 标签：尺寸放大 + 间距收紧
+.el-tag,
+.el-tag.tag {
+  margin: 0 !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--gray-border) !important;
+  background-color: var(--gray-white) !important;
+  color: var(--gray-2) !important;
+  font-size: 14px !important;
+  font-weight: 500;
+  height: 36px !important;
+  line-height: 34px !important;
+  padding: 0 14px !important;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+
+  // 关闭按钮（默认中灰小圆形）
+  .el-tag__close {
+    color: var(--gray-2) !important;
+    width: 18px !important;
+    height: 18px !important;
+    line-height: 18px !important;
+    text-align: center !important;
+    border-radius: 50% !important;
+    margin-left: 8px !important;
+    margin-right: -4px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+    transform: scale(0.85) !important;
+
+    &:hover {
+      background-color: var(--status-offline) !important;
+      color: #ffffff !important;
+      transform: scale(1.15) !important;
+    }
+  }
+
+  // 激活态：科技蓝底 + 蓝边框
+  &.active,
+  &.is-active {
+    background-color: var(--primary-bg) !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+
+    .el-tag__close {
+      color: rgba(255, 255, 255, 0.6) !important;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+// ============================================================
+// 动效增强：多标签页 Hover 背景生长动画
+// ============================================================
+
+.header-tags .el-tag,
+.header-tags .el-tag.tag {
+  position: relative !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+
+  // 伪元素背景层：从底部向上生长
+  &::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: var(--primary-bg) !important;
+    z-index: -1 !important;
+    transform: scaleY(0) !important;
+    transform-origin: bottom !important;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    border-radius: inherit !important;
+  }
+
+  // 非激活态：Hover 时触发生长动画
+  &:not(.active):not(.is-active):hover {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    background-color: var(--gray-white) !important;
+
+    &::before {
+      transform: scaleY(1) !important;
+    }
+  }
+
+  // 激活态保持不变
+  &.active,
+  &.is-active {
+    &::before {
+      display: none !important;
+    }
+  }
+}
+
+// --------------------------------------------------------
+// 二级子菜单（el-sub-menu 下的标题）
+// --------------------------------------------------------
+.el-sub-menu.is-active {
+  > .el-sub-menu__title {
+    color: #ffffff !important;
+
+    &::before {
+      transform: translateY(-50%) scaleY(1);
+      height: 100%;
+      opacity: 1;
+    }
+  }
+}

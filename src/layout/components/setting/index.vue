@@ -91,21 +91,36 @@
 
   .menu-item {
     margin-left: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    padding: 4px 8px;
 
     * {
       outline: none;
     }
+
+    &:hover {
+      background-color: var(--gray-bg);
+    }
   }
 
   .title {
-    color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    color: var(--gray-2);
+    transition: color 0.2s ease;
 
+    &:hover {
+      color: var(--primary);
+    }
 
     .nickname {
-      padding: 0 10px;
+      padding: 0 8px;
+      color: var(--gray-1);
+      font-weight: 500;
+      font-size: 14px;
     }
   }
 }

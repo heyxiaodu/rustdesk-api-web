@@ -43,9 +43,18 @@
     height: 100%;
     display: flex;
     align-items: center;
-    margin-right: 10px;
-    font-size: 16px;
+    margin-right: 12px;
+    font-size: 18px;
     cursor: pointer;
+    color: var(--gray-2);
+    padding: 0 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: var(--gray-bg);
+      color: var(--primary);
+    }
   }
 
   .header-logo {
@@ -56,12 +65,15 @@
     .title {
       display: block;
       margin-left: 10px;
+      color: var(--gray-1);
+      font-weight: 600;
+      font-size: 15px;
     }
 
     .logo {
       display: block;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
     }
   }
 
